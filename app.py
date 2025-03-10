@@ -9,15 +9,26 @@ from sklearn.metrics import f1_score, precision_score, recall_score
 import re
 import firebase_admin
 from firebase_admin import credentials, auth
-from firebase_admin import exceptions
+from firebase_admin import exceptions, firestore
 
+
+# Logging Configuration
+logging.basicConfig(level=logging.INFO)
+
+# Get Firebase credentials from environment variables
+firebase_service_account = os.getenv('FIREBASE_SERVICE_ACCOUNT')
+firebase_database_url = os.getenv('FIREBASE_DATABASE_URL')
+
+if not firebase_service_account or not firebase_database_url:
+    raise EnvironmentError("Environment variables for Firebase are not set correctly.")
+
+# Initialize Firebase
+cred = credentials.Certificate(json.loads(firebase_service_account))
+firebase_admin.initialize_app(cred, {
+    'databaseURL': firebase_database_url
+})
 
 app = Flask(__name__)
-
-
-# Initialize Firebase Admin SDK
-cred = credentials.Certificate("firebase-key.json")
-firebase_admin.initialize_app(cred)
 
 app.secret_key = b'\x82\x94\x08\x87\x8c\xbd\xc4%hf \x85\x9d\xf0sj\xba\xe7U\xd7\x01\xf1\xf3\xa7'
 
