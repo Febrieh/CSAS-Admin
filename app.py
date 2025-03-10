@@ -1,3 +1,5 @@
+import os
+import json
 from flask import Flask, render_template, jsonify, request, redirect, url_for, session
 import pandas as pd
 import joblib
@@ -8,8 +10,7 @@ from googletrans import Translator
 from sklearn.metrics import f1_score, precision_score, recall_score
 import re
 import firebase_admin
-from firebase_admin import credentials, auth
-from firebase_admin import exceptions, firestore
+from firebase_admin import credentials, auth, exceptions, firestore
 
 
 # Logging Configuration
