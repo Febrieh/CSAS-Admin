@@ -17,7 +17,7 @@ from firebase_admin import credentials, auth, exceptions, firestore
 logging.basicConfig(level=logging.INFO)
 
 # Get Firebase credentials from environment variables
-firebase_service_account = os.getenv('FIREBASE_SERVICE_ACCOUNT' + '\xc2\xa0') 
+firebase_service_account = os.getenv('FIREBASE_SERVICE_ACCOUNT') 
 firebase_database_url = os.getenv('FIREBASE_DATABASE_URL')
 
 if not firebase_service_account or not firebase_database_url:
